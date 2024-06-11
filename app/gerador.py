@@ -1,19 +1,17 @@
-# CLASSIFICADOR
+# GERADOR
 
 import PyPDF2
 import tempfile
 import google.generativeai as genai
 import json
 
-class ClassificadorAssuntoODS:
-    def __init__(self, caminho_credenciais, caminho_pdf):
-        self.model = self.configurar_modelo_generativo(caminho_credenciais)
+class GeradorAssuntoODS:
+    def __init__(self, api_key, caminho_pdf):
+        self.model = self.configurar_modelo_generativo(api_key)
         self.caminho_pdf = caminho_pdf
 
 
-    def configurar_modelo_generativo(self, caminho_credenciais):
-        with open(caminho_credenciais) as file:
-            api_key = json.load(file)[0]['API-KEY']
+    def configurar_modelo_generativo(self, api_key):
 
         genai.configure(api_key=api_key)
 
@@ -100,7 +98,7 @@ class ClassificadorAssuntoODS:
         prompt = '''
         Catalogue a ODS (Objetivos do Desenvolvimento Sustentável) que esse documento representa.
 
-        - Analise o documento e insira UM ou MAIS ODS (Objetivos do Desenvolvimento Sustentável).
+        - Analise o documento e imprima UM ou MAIS ODS (Objetivos do Desenvolvimento Sustentável) PERTINENTES de acordo com o conteúdo.
 
         Seguem ODS's:
         """
@@ -123,7 +121,7 @@ class ClassificadorAssuntoODS:
         ODS: 17. Parcerias e meios de implementação
         """
 
-        - Catalogue a ODS de forma PERTINENTE com o assunto.
+       
         - Caso haja mais que uma, responda em formato de lista.
         - Responda apenas o número e nome da ODS.
 
