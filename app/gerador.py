@@ -83,7 +83,7 @@ class GeradorAssuntoODS:
         prompt = '''
         Catalogue os assuntos desse documento conforme o campo 653$a do MARC 21.
 
-        - Analise o documento e insira apenas 5 assuntos, em PT-BR, mais relevantes de acordo com o conteúdo.
+        - Analise o documento e insira apenas 5 assuntos/termos indexadores, em PT-BR, mais relevantes de acordo com o conteúdo.
         - Responda apenas os assuntos.
         '''
         
@@ -98,33 +98,70 @@ class GeradorAssuntoODS:
         prompt = '''
         Catalogue a ODS (Objetivos do Desenvolvimento Sustentável) que esse documento representa.
 
-        - Analise o documento e imprima UM ou MAIS ODS (Objetivos do Desenvolvimento Sustentável) PERTINENTES de acordo com o conteúdo.
+        - Analise o documento e imprima de 1 a 3 (Objetivos do Desenvolvimento Sustentável) PERTINENTES de acordo com o conteúdo.
 
         Seguem ODS's:
         """
-        ODS: 1. Erradicação da pobreza
-        ODS: 2. Erradicação da fome
-        ODS: 3. Saúde e bem-estar
-        ODS: 4. Educação de qualidade
-        ODS: 5. Igualdade de gênero
-        ODS: 6. Água potável e saneamento
-        ODS: 7. Energia acessível e limpa
-        ODS: 8. Trabalho decente e crescimento econômico
-        ODS: 9. Inovação e infraestrutura
-        ODS: 10. Redução das desigualdades
-        ODS: 11. Cidades e comunidades sustentáveis
-        ODS: 12. Consumo e produção responsáveis
-        ODS: 13. Ação contra a mudança global do clima
-        ODS: 14. Vida na água
-        ODS: 15. Vida terrestre
-        ODS: 16. Paz, justiça e instituições eficazes
-        ODS: 17. Parcerias e meios de implementação
+        ODS 1. Erradicação da pobreza: 
+        Acabar com a pobreza em todas as suas formas, em todos os lugares.
+        
+        ODS 2. Erradicação da fome:
+        Acabar com a fome, alcançar a segurança alimentar e melhoria da nutrição e promover a agricultura sustentável.     
+        
+        ODS 3. Saúde e bem-estar:
+        Assegurar uma vida saudável e promover o bem-estar para todas e todos, em todas as idades.
+        
+        ODS 4. Educação de qualidade:
+        Objetivo 4. Assegurar a educação inclusiva e equitativa e de qualidade, e promover oportunidades de aprendizagem ao longo da vida para todas e todos.
+        
+        ODS 5. Igualdade de gênero:
+        Objetivo 5. Alcançar a igualdade de gênero e empoderar todas as mulheres e meninas.
+        
+        ODS 6. Água potável e saneamento:
+        Objetivo 6. Assegurar a disponibilidade e gestão sustentável da água e saneamento para todas e todos.
+        
+        ODS 7. Energia acessível e limpa:
+        Objetivo 7. Assegurar o acesso confiável, sustentável, moderno e a preço acessível à energia para todas e todos.
+        
+        ODS 8. Trabalho decente e crescimento econômico:
+        Objetivo 8. Promover o crescimento econômico sustentado, inclusivo e sustentável, emprego pleno e produtivo e trabalho decente para todas e todos.
+        
+        ODS 9. Inovação e infraestrutura:
+        Objetivo 9. Construir infraestruturas resilientes, promover a industrialização inclusiva e sustentável e fomentar a inovação.
+        
+        ODS 10. Redução das desigualdades:
+        Objetivo 10. Reduzir a desigualdade dentro dos países e entre eles.
+        
+        ODS 11. Cidades e comunidades sustentáveis:
+        Objetivo 11. Tornar as cidades e os assentamentos humanos inclusivos, seguros, resilientes e sustentáveis.
+        
+        ODS 12. Consumo e produção responsáveis:
+        Objetivo 12. Assegurar padrões de produção e de consumo sustentáveis
+        
+        ODS 13. Ação contra a mudança global do clima:
+        Objetivo 13. Tomar medidas urgentes para combater a mudança climática e seus impactos.
+        
+        ODS 14. Vida na água:
+        Objetivo 14. Conservação e uso sustentável dos oceanos, dos mares e dos recursos marinhos para o desenvolvimento sustentável.
+        
+        ODS 15. Vida terrestre:
+        Objetivo 15. Proteger, recuperar e promover o uso sustentável dos ecossistemas terrestres, gerir de forma sustentável as florestas, combater a desertificação, deter e reverter a degradação da terra e deter a perda de biodiversidade.
+        
+        ODS 16. Paz, justiça e instituições eficazes:
+        Objetivo 16. Promover sociedades pacíficas e inclusivas para o desenvolvimento sustentável, proporcionar o acesso à justiça para todos e construir instituições eficazes, responsáveis e inclusivas em todos os níveis.
+        
+        ODS 17. Parcerias e meios de implementação:
+        Objetivo 17. Fortalecer os meios de implementação e revitalizar a parceria global para o desenvolvimento sustentável.
+        
         """
-
-       
-        - Caso haja mais que uma, responda em formato de lista.
+        
         - Responda apenas o número e nome da ODS.
-
+        - Caso haja mais que uma, responda em formato de lista, como no exemplo:
+            - ODS 10. Redução das desigualdades
+            - ODS 8. Trabalho decente e crescimento econômico
+       
         '''
         response = self.model.generate_content([prompt, arquivo])
         return response.text
+    
+    
