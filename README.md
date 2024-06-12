@@ -2,7 +2,7 @@
 
 ## Descrição
 
-O **Classificador de Assuntos e ODS** "IAGeraTemas" é uma aplicação que utiliza inteligência artificial generativa para identificar e gerar os principais assuntos e Objetivos de Desenvolvimento Sustentável (ODS) de documentos em formato PDF. A ferramenta é projetada para facilitar a análise de textos, proporcionando uma compreensão rápida e precisa dos temas abordados, com base nas diretrizes do campo 653$a do MARC 21.
+O **Classificador de Assuntos e ODS** "IAGeraTemas" é uma aplicação que utiliza inteligência artificial generativa para identificar e gerar os principais assuntos e Objetivos de Desenvolvimento Sustentável (ODS) de documentos em formato PDF. A ferramenta é projetada para facilitar a análise de textos, proporcionando uma compreensão rápida dos temas abordados e se tornar um balizador no processo de descrição temática de um documento.
 
 ## Funcionalidades
 
@@ -28,9 +28,9 @@ O **Classificador de Assuntos e ODS** "IAGeraTemas" é uma aplicação que utili
 
 
 ## Estrutura do Projeto
-- app.py: Script principal que contém a interface Streamlit.
-- gerador.py: Script que contém a classe GeradorAssuntoODS, responsável pelo processamento dos documentos e interação com a API do Google Generative AI.
-- requirements.txt: Arquivo com as dependências do projeto.
+- **app.py** : Script principal que contém a interface Streamlit.
+- **gerador.py** : Script que contém a classe GeradorAssuntoODS, responsável pelo processamento dos documentos e interação com a API do Google Generative AI.
+- **requirements.txt** : Arquivo com as dependências do projeto.
 
 ## Contribuição
 - Faça um fork do projeto.
