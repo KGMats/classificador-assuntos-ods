@@ -22,7 +22,7 @@ st.header('Gerador de Assuntos e ODS',anchor=False)
 
 #PREÂMBULO
 st.write('''
-        Bem-vindo ao IA GeraTemas, uma aplicação que utiliza inteligência artificial generativa para identificar e gerar os principais assuntos e Objetivos de Desenvolvimento Sustentável (ODS) de documentos. A ferramenta é projetada para facilitar a análise de textos, proporcionando uma compreensão rápida e precisa dos temas abordados.
+        Bem-vindo ao IA GeraTemas, uma aplicação que utiliza inteligência artificial generativa (Gemini - Google) para identificar e gerar os principais assuntos e Objetivos de Desenvolvimento Sustentável (ODS) de documentos. A ferramenta é projetada para facilitar a análise de textos, proporcionando uma compreensão rápida e precisa dos temas abordados.
         ''')
 st.markdown("&nbsp;")
 st.write('''
@@ -42,7 +42,7 @@ st.divider()
 st.markdown("&nbsp;")
 
 #INPUT DE DADOS
-api_key = st.text_input('Insira sua API Key', 'AIopS0AraGsD3Pd3g_dfrvUsdP89L7u8LM_md-cg')
+api_key = st.text_input('Insira sua API Key do Gemini', 'AIpsS0AfgGsD3Pd3g_dfrvUsdL78L7u8LM_md-cg')
 uploaded_file = st.file_uploader('Faça o upload do arquivo:', type=['pdf'],accept_multiple_files=False)
 
 
