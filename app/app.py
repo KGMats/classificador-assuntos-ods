@@ -53,12 +53,16 @@ if st.button('Processar'):
             temp_file.write(uploaded_file.read())
             temp_pdf_path = temp_file.name
             
-            gerador = GeradorAssuntoODS(api_key=api_key,caminho_pdf=temp_pdf_path)
-            assuntos = gerador.catalogar_assunto()
-            ods = gerador.catalogar_ODS()
-            
-            st.write(f'ASSUNTOS:\n\n{assuntos}')
-            st.write(f'ODS:\n\n{ods}')
+            try:
+                gerador = GeradorAssuntoODS(api_key=api_key, caminho_pdf=temp_pdf_path)
+                assuntos = gerador.catalogar_assunto()
+                ods = gerador.catalogar_ODS()
+                
+                st.write(f'ASSUNTOS:\n\n{assuntos}')
+                st.write(f'ODS:\n\n{ods}')
+                
+            except Exception as e:
+                st.error('Houve um problema na API. Por favor, recarregue a página e tente novamente.')
     else:
         st.warning('Por favor, faça o upload de um documento para continuar.')
 
