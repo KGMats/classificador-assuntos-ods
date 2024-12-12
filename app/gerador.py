@@ -19,7 +19,7 @@ class GeradorAssuntoODS:
             'temperature': 1,
             'top_p': 1,
             'top_k': 0,
-            'max_output_tokens': 2000,
+            'max_output_tokens': 200,
         }
 
         safety_settings = [
