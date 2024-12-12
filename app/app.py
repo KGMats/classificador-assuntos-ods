@@ -62,7 +62,7 @@ if st.button('Processar'):
                 st.write(f'ODS:\n\n{ods}')
                 
             except Exception as e:
-                st.error('Houve um problema na API. Por favor, recarregue a página e tente novamente.')
+                st.error(f'Houve um problema na API. Por favor, recarregue a página e tente novamente. Detalhes do erro: {str(e)}')
     else:
         st.warning('Por favor, faça o upload de um documento para continuar.')
 
