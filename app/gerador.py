@@ -85,6 +85,7 @@ class GeradorAssuntoODS:
 
         - Analise o documento e insira apenas 5 assuntos/termos indexadores, em PT-BR, mais relevantes de acordo com o conteúdo.
         - Responda apenas os assuntos.
+        - Liste os assuntos.
         '''
         
         response = self.model.generate_content([prompt, arquivo])
