@@ -2,52 +2,18 @@
 
 import PyPDF2
 import tempfile
-import google.generativeai as genai
-import json
+from google import genai
+from google.genai import types
 
 class GeradorAssuntoODS:
     def __init__(self, api_key, caminho_pdf):
-        self.model = self.configurar_modelo_generativo(api_key)
+        self.client = self.configurar_client(api_key)
         self.caminho_pdf = caminho_pdf
 
 
-    def configurar_modelo_generativo(self, api_key):
-
-        genai.configure(api_key=api_key)
-
-        generation_config = {
-            'temperature': 1,
-            'top_p': 1,
-            'top_k': 0,
-            'max_output_tokens': 200,
-        }
-
-        safety_settings = [
-            {
-                'category': 'HARM_CATEGORY_HARASSMENT',
-                'threshold': 'BLOCK_NONE'
-            },
-            {
-                'category': 'HARM_CATEGORY_HATE_SPEECH',
-                'threshold': 'BLOCK_NONE'
-            },
-            {
-                'category': 'HARM_CATEGORY_SEXUALLY_EXPLICIT',
-                'threshold': 'BLOCK_NONE'
-            },
-            {
-                'category': 'HARM_CATEGORY_DANGEROUS_CONTENT',
-                'threshold': 'BLOCK_NONE'
-            },
-        ]
-
-        model = genai.GenerativeModel(
-            model_name='models/gemini-2.0-flash',
-            generation_config=generation_config,
-            safety_settings=safety_settings
-        )
-
-        return model
+    def configurar_client(self, api_key):
+        client = genai.Client(api_key=api_key)
+        return client
 
     def transformar_pdf_texto(self):
         arquivo_pdf = open(self.caminho_pdf, 'rb')
@@ -68,7 +34,12 @@ class GeradorAssuntoODS:
         return caminho_arquivo_txt
 
     def carregar_arquivo_genai(self, caminho_arquivo):
-        arquivo = genai.upload_file(path=caminho_arquivo, display_name='pdf_texto')
+        arquivo = self.client.files.upload(
+            file=caminho_arquivo,
+            config=types.UploadFileConfig(
+                display_name='pdf_texto'
+            ),
+            )
         return arquivo
 
     def processar_arquivo(self):
@@ -77,9 +48,31 @@ class GeradorAssuntoODS:
 
         return arquivo
 
+
+    def get_safety_settings(self):
+        return [
+            {
+                'category': 'HARM_CATEGORY_HARASSMENT',
+                'threshold': 'BLOCK_NONE'
+            },
+            {
+                'category': 'HARM_CATEGORY_HATE_SPEECH',
+                'threshold': 'BLOCK_NONE'
+            },
+            {
+                'category': 'HARM_CATEGORY_SEXUALLY_EXPLICIT',
+                'threshold': 'BLOCK_NONE'
+            },
+            {
+                'category': 'HARM_CATEGORY_DANGEROUS_CONTENT',
+                'threshold': 'BLOCK_NONE'
+            },
+        ]
     def catalogar_assunto(self):
         arquivo = self.processar_arquivo()
         
+        
+
         prompt = '''
         Catalogue os assuntos desse documento conforme o campo 653$a do MARC 21.
 
@@ -88,7 +81,18 @@ class GeradorAssuntoODS:
         - Liste os assuntos.
         '''
         
-        response = self.model.generate_content([prompt, arquivo])
+        
+        response = self.client.models.generate_content(
+            model='models/gemini-2.0-flash',
+            contents=[prompt, arquivo],
+            config=types.GenerateContentConfig(
+                safety_settings=self.get_safety_settings(),
+                max_output_tokens=200,
+                temperature=1,
+                top_p=1,
+                top_k=0
+            ),
+        )
         
         return response.text
 
@@ -162,7 +166,17 @@ class GeradorAssuntoODS:
             - ODS 8. Trabalho decente e crescimento econômico
        
         '''
-        response = self.model.generate_content([prompt, arquivo])
+        response = self.client.models.generate_content(
+             model='models/gemini-2.0-flash',
+            contents=[prompt, arquivo],
+            config=types.GenerateContentConfig(
+                safety_settings=self.get_safety_settings(),
+                max_output_tokens=200,
+                temperature=1,
+                top_p=1,
+                top_k=0
+            )
+        )
         return response.text
     
     
