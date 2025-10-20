@@ -1,15 +1,11 @@
 #PROCESSADOR PDF - Subject and SDG Classifier powered by Generative AI
-
-import PyPDF2
 import tempfile
-import google.generativeai as genai
-import json
 import streamlit as st
 
 from gerador import GeradorAssuntoODS
 
 
-#CONFICURAÇÕES INICIAIS
+#CONFIGURAÇÕES INICIAIS
 st.set_page_config(
     layout='wide',
     page_title='ia-geratemas',
